@@ -4,4 +4,6 @@ RUN mkdir /build
 
 WORKDIR /build
 
-RUN npm i -g yarn
+RUN npm  --verbose i -g yarn ### build should fail here
+
+CMD ["sh", "build.sh "]
