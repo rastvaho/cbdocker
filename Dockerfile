@@ -1,4 +1,4 @@
-FROM adobejmong/nodejs_v10:2.0.0-alpine
+FROM mhart/alpine-node
 
 RUN mkdir /build
 
