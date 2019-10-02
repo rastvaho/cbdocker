@@ -1,18 +1,15 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      docker: 18
-  pre_build:
-    commands:
-    - echo Logging in to Amazon ECR...
-  build:
-    commands:
-    - echo Build started on `date`
-    - echo Building the Docker image...
-    - docker build -t myimage:latest .
-  post_build:
-    commands:
-    - echo Build completed on `date`
-    - echo Pushing the Docker image...
+  phases:
+    install:
+      commands:
+      - echo Starting the docker daemon
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+      - sleep 10
+      - docker version
+    build:
+      commands:
+      - mv Dockerfile /tmp/Dockerfile
+      - cd /tmp
+      - docker build -t nodejs -f Dockerfile .
