@@ -1,15 +1,13 @@
 version: 0.2
-
 phases:
-  phases:
-    install:
-      commands:
-      - echo Starting the docker daemon
-      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
-      - sleep 10
-      - docker version
-    build:
-      commands:
-      - mv Dockerfile /tmp/Dockerfile
-      - cd /tmp
-      - docker build -t nodejs -f Dockerfile .
+  install:
+    commands:
+    - echo Starting the docker daemon
+    - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+    - sleep 10
+    - docker version
+  build:
+    commands:
+    - mv Dockerfile /tmp/Dockerfile
+    - cd /tmp
+    - docker build -t nodejs -f Dockerfile .
